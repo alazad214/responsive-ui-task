@@ -45,4 +45,9 @@ class TextFontStyle {
     fontSize: 12.sp,
     fontWeight: FontWeight.w500,
   );
+  static var headline30w30c000000 = TextStyle(
+    color: AppColors.c000000,
+    fontSize: 30.sp,
+    fontWeight: FontWeight.w600,
+  );
 }

@@ -97,43 +97,43 @@ class CustomTextfield extends StatelessWidget {
         fillColor: fillColor ?? Colors.transparent,
         filled: true,
         contentPadding:
-            contentPadding ??
-            EdgeInsets.symmetric(vertical: 16, horizontal: 30),
+            contentPadding ?? EdgeInsets.symmetric(vertical: 0, horizontal: 0),
         hintText: hintText,
+        labelStyle:
+            labelStyle ??
+            TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: AppColors.c000000,
+            ),
         hintStyle:
             hintTextSyle ??
             TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
-              color: AppColors.c9CA3AF,
+              color: AppColors.cD6D6D6,
             ),
-
         labelText: labelText,
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 8),
-          borderSide: const BorderSide(color: Colors.red, width: 1),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 8),
-          borderSide: BorderSide(color: borderColor ?? Colors.blue, width: 1.5),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 8),
+
+        enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: borderColor ?? AppColors.cC0C0C0,
-            width: 1,
-          ),
+            color: Color(0xFFADADAD),
+          ), // normal underline color
         ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 8),
-          borderSide: const BorderSide(color: Colors.red, width: 1),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 8),
+        focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: borderColor ?? AppColors.cC0C0C0,
-            width: 1,
-          ),
+            color: Color(0xFFADADAD),
+            width: 2,
+          ), // thicker when focused
+        ),
+        errorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.red), // red underline on error
+        ),
+        focusedErrorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 2,
+          ), // thicker red on focused error
         ),
       ),
 

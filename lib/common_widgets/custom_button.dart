@@ -25,7 +25,7 @@ Widget customButton({
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: color ?? AppColors.primaryColor,
-        borderRadius: BorderRadius.circular(borderRadius ?? 20.r),
+        borderRadius: BorderRadius.circular(borderRadius ?? 30.r),
         border: Border.all(color: borderColor ?? AppColors.primaryColor),
       ),
       child: Text(

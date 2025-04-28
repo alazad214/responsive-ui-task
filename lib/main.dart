@@ -1,8 +1,11 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:m360_ict_task/core/constants/app_colors.dart';
 import 'package:m360_ict_task/helpers/appdata_helper.dart';
 import 'package:m360_ict_task/splash_screen.dart';
 import 'helpers/internet_checker_helper.dart';
@@ -14,7 +17,7 @@ void main() async {
   await GetStorage.init();
   diSetup();
   await OrientationHelper.lockPortrait();
-  runApp(const MyApp());
+  runApp(DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,6 +33,9 @@ class MyApp extends StatelessWidget {
         builder: (_, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
+            theme: ThemeData.light().copyWith(
+              scaffoldBackgroundColor: AppColors.cWhite,
+            ),
             home: SplashScreen(),
           );
         },
