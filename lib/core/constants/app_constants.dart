@@ -1,0 +1,11 @@
+const String kKeyStatus = 'status';
+const String kEmail = 'email';
+const String kUserEmail = 'userEmail';
+const String kKeyIsLogin = 'is_login';
+const String kKayAccessToken = 'accessToken';
+const String userId = 'user_id';
+const String forgetEmail = 'forget_Email';
+const String forgetOtp = 'forget_otp';
+const String kKeyCountryCode = 'k_key_Country_Code';
+const String kKeyLanguage = 'kKey_Language';
+const String kKeyLocation = 'current_location';
