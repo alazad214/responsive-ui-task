@@ -9,6 +9,7 @@ class CustomTextfield extends StatelessWidget {
   final TextInputType? inputType;
   final double? fieldHeight;
   final int? maxline;
+  // ignore: prefer_typing_uninitialized_variables
   final validator;
   final bool? validation;
   final Widget? suffixIcon;
@@ -32,6 +33,7 @@ class CustomTextfield extends StatelessWidget {
   final Color? borderColor;
   final TextAlign? textAlign;
   final VoidCallback? ontap;
+  // ignore: prefer_typing_uninitialized_variables
   final contentPadding;
 
   //final double

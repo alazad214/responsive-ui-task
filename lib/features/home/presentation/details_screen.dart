@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:m360_ict_task/core/constants/app_colors.dart';
 import 'package:m360_ict_task/core/constants/text_font_style.dart';
-import 'package:m360_ict_task/features/home/presentation/widgets/buildPersonCard.dart';
+import 'package:m360_ict_task/features/home/presentation/widgets/build_person_card.dart';
 import 'package:m360_ict_task/features/home/presentation/widgets/details_appbar.dart';
 import 'package:m360_ict_task/features/home/presentation/widgets/history_chart.dart';
 import 'package:m360_ict_task/features/home/presentation/widgets/history_see_all.dart';

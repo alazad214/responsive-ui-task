@@ -13,11 +13,11 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   final String title;
-  final onCallBack;
+  final VoidCallback? onCallBack;
   final bool leadingVisible;
-  final actions;
-  final centerTitle;
-  final backgroundColor;
+  final List<Widget>? actions;
+  final bool? centerTitle;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {

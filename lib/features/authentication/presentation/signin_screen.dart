@@ -8,133 +8,159 @@ import 'package:m360_ict_task/common_widgets/custom_textfeild.dart';
 import 'package:m360_ict_task/core/constants/app_assets/assets_icons.dart';
 import 'package:m360_ict_task/core/constants/app_colors.dart';
 import 'package:m360_ict_task/core/constants/text_font_style.dart';
+import 'package:m360_ict_task/core/constants/textfield_validation.dart';
 import 'package:m360_ict_task/features/authentication/controller/login_controller.dart';
 import 'package:m360_ict_task/features/authentication/presentation/send_otp_screen.dart';
 import 'package:m360_ict_task/features/authentication/presentation/signup_screen.dart';
 import 'package:m360_ict_task/features/authentication/presentation/widgets/social_icon.dart';
-import 'package:m360_ict_task/features/home/presentation/home_screen.dart';
 import 'package:m360_ict_task/helpers/ui_helper.dart';
 import '../../../common_widgets/powered_by_text.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
   final SignInController controller = SignInController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(UIHelper.defaultPadding()),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Sign In', style: TextFontStyle.headline30w30c000000),
-                  UIHelper.verticalSpace(8.h),
-                  Text(
-                    "Let's save environment together",
-                    style: TextFontStyle.headline14w400c1F2937,
-                  ),
-                  UIHelper.verticalSpaceLarge,
+      body: Form(
+        key: _formKey,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(UIHelper.defaultPadding()),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Sign In', style: TextFontStyle.headline30w30c000000),
+                    UIHelper.verticalSpace(8.h),
+                    Text(
+                      "Let's save environment together",
+                      style: TextFontStyle.headline14w400c1F2937,
+                    ),
+                    UIHelper.verticalSpaceLarge,
 
-                  //Email Field-->>
-                  CustomTextfield(
-                    hintText: 'user@example.com',
-                    labelText: 'Email',
-                  ),
+                    //Email Field-->>
+                    CustomTextfield(
+                      hintText: 'user@example.com',
+                      labelText: 'Email',
+                      validator: InputValidator.emailValidate,
+                      onChanged: (value) {
+                        controller.email.value = value;
+                      },
+                    ),
 
-                  UIHelper.verticalSpace(16.h),
+                    UIHelper.verticalSpace(16.h),
 
-                  //Password Field-->>
-                  Obx(
-                    () => CustomTextfield(
-                      hintText: '**********',
-                      labelText: 'Password',
-                      isObsecure: controller.isSecured.value,
-                      suffixIcon: IconButton(
-                        onPressed: controller.isSecuredFunc,
-                        icon: Icon(
-                          controller.isSecured.value == true
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: AppColors.cD6D6D6,
+                    //Password Field-->>
+                    Obx(
+                      () => CustomTextfield(
+                        hintText: '**********',
+                        labelText: 'Password',
+                        isObsecure: controller.isSecured.value,
+                        validator: InputValidator.passwordValidate,
+                        onChanged: (value) {
+                          controller.password.value = value;
+                        },
+                        suffixIcon: IconButton(
+                          onPressed: controller.isSecuredFunc,
+                          icon: Icon(
+                            controller.isSecured.value == true
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: AppColors.cD6D6D6,
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
-                  UIHelper.verticalSpace(8.h),
+                    UIHelper.verticalSpace(8.h),
 
-                  //Remember Me & Forget Password-->
-                  buildRememberMe(),
-                  UIHelper.verticalSpace(24.h),
+                    //Remember Me & Forget Password-->
+                    buildRememberMe(),
+                    UIHelper.verticalSpace(24.h),
 
-                  //Sign In Button-->>
-                  customButton(
-                    name: 'Sign In',
-                    onCallBack: () {
-                      Get.to(() => HomeScreen());
-                    },
-                    context: context,
-                  ),
+                    //Sign In Button-->>
+                    Obx(() {
+                      return controller.isLoading.value
+                          ? Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.primaryColor,
+                            ),
+                          )
+                          : customButton(
+                            name: 'Sign In',
+                            onCallBack: () {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+                                controller.logInFunc();
+                              }
+                            },
+                            context: context,
+                          );
+                    }),
 
-                  UIHelper.verticalSpace(24.h),
-                  Center(
-                    child: Text(
-                      'Or Sign In with',
-                      style: TextFontStyle.headline12w400cADADAD,
-                    ),
-                  ),
-                  UIHelper.verticalSpace(22.h),
-
-                  //Social Login Icon-->>
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      socialIcon(assetPath: AssetsIcons.google, ontap: () {}),
-                      SizedBox(width: 16.w),
-                      socialIcon(assetPath: AssetsIcons.facebook, ontap: () {}),
-                      SizedBox(width: 16.w),
-                      socialIcon(
-                        assetPath: AssetsIcons.microsoft,
-                        ontap: () {},
-                      ),
-                      SizedBox(width: 16.w),
-                      socialIcon(assetPath: AssetsIcons.apple, ontap: () {}),
-                    ],
-                  ),
-                  UIHelper.verticalSpaceMedium,
-
-                  //Don't have an account-->>
-                  Center(
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'Don’t have an account? ',
+                    UIHelper.verticalSpace(24.h),
+                    Center(
+                      child: Text(
+                        'Or Sign In with',
                         style: TextFontStyle.headline12w400cADADAD,
-                        children: [
-                          TextSpan(
-                            text: 'Sign Up',
-                            style: TextFontStyle.headline14w700primaryColor,
-                            recognizer:
-                                TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Get.to(() => SignupScreen());
-                                  },
-                          ),
-                        ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-              UIHelper.verticalSpace(100),
-              powerByText(),
-            ],
+                    UIHelper.verticalSpace(22.h),
+
+                    //Social Login Icon-->>
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        socialIcon(assetPath: AssetsIcons.google, ontap: () {}),
+                        SizedBox(width: 16.w),
+                        socialIcon(
+                          assetPath: AssetsIcons.facebook,
+                          ontap: () {},
+                        ),
+                        SizedBox(width: 16.w),
+                        socialIcon(
+                          assetPath: AssetsIcons.microsoft,
+                          ontap: () {},
+                        ),
+                        SizedBox(width: 16.w),
+                        socialIcon(assetPath: AssetsIcons.apple, ontap: () {}),
+                      ],
+                    ),
+                    UIHelper.verticalSpaceMedium,
+
+                    //Don't have an account-->>
+                    Center(
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'Don’t have an account? ',
+                          style: TextFontStyle.headline12w400cADADAD,
+                          children: [
+                            TextSpan(
+                              text: 'Sign Up',
+                              style: TextFontStyle.headline14w700primaryColor,
+                              recognizer:
+                                  TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Get.to(() => SignupScreen());
+                                    },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                UIHelper.verticalSpace(100),
+                powerByText(),
+              ],
+            ),
           ),
         ),
       ),
