@@ -6,8 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:m360_ict_task/core/constants/app_colors.dart';
+
 import 'package:m360_ict_task/helpers/appdata_helper.dart';
-import 'package:m360_ict_task/splash_screen.dart';
+import 'features/home/presentation/home_screen.dart';
 import 'helpers/internet_checker_helper.dart';
 import 'helpers/orientation_helper.dart';
 
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData.light().copyWith(
               scaffoldBackgroundColor: AppColors.cWhite,
             ),
-            home: SplashScreen(),
+            home: HomeScreen(),
           );
         },
       ),
