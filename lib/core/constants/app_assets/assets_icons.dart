@@ -11,6 +11,7 @@ class AssetsIcons {
     static String microsoft = 'assets/icons/microsoft.png';
     static String apple = 'assets/icons/apple.png';
     static String visibility = 'assets/icons/visibility.png';
+    static String home = 'assets/icons/home.png';
 
 
 }

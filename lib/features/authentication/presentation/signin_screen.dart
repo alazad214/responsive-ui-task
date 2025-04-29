@@ -12,6 +12,7 @@ import 'package:m360_ict_task/features/authentication/controller/login_controlle
 import 'package:m360_ict_task/features/authentication/presentation/send_otp_screen.dart';
 import 'package:m360_ict_task/features/authentication/presentation/signup_screen.dart';
 import 'package:m360_ict_task/features/authentication/presentation/widgets/social_icon.dart';
+import 'package:m360_ict_task/features/home/presentation/home_screen.dart';
 import 'package:m360_ict_task/helpers/ui_helper.dart';
 import '../../../common_widgets/powered_by_text.dart';
 
@@ -76,7 +77,9 @@ class SignInScreen extends StatelessWidget {
                   //Sign In Button-->>
                   customButton(
                     name: 'Sign In',
-                    onCallBack: () {},
+                    onCallBack: () {
+                      Get.to(() => HomeScreen());
+                    },
                     context: context,
                   ),
 
@@ -158,7 +161,7 @@ class SignInScreen extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Get.to(()=>SendOtpScreen());
+            Get.to(() => SendOtpScreen());
           },
           child: Text(
             'Forgotten Password',
