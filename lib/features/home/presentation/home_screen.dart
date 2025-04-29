@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/route_manager.dart';
+import 'package:m360_ict_task/features/home/presentation/details_screen.dart';
 import 'package:m360_ict_task/features/home/presentation/widgets/header_card.dart';
 import 'package:m360_ict_task/features/home/presentation/widgets/place_card.dart';
 import 'package:m360_ict_task/helpers/ui_helper.dart';
@@ -36,12 +38,17 @@ class HomeScreen extends StatelessWidget {
                     padding: EdgeInsets.all(0),
                     itemBuilder: (_, index) {
                       final data = placeData[index];
-                      return placeCard(
-                        title: data['title'],
-                        ppm: data['ppm'],
-                        status: data['status'],
-                        percentage: "${data['percentage']}%",
-                        avatarCount: data['avatarCount'],
+                      return InkWell(
+                        onTap: () {
+                          Get.to(() => DetailsScreen(data: data));
+                        },
+                        child: placeCard(
+                          title: data['title'],
+                          ppm: data['ppm'],
+                          status: data['status'],
+                          percentage: "${data['percentage']}%",
+                          avatarCount: data['avatarCount'],
+                        ),
                       );
                     },
                   ),

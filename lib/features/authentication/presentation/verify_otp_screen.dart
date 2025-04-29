@@ -87,7 +87,9 @@ class VerifyOtpScreen extends StatelessWidget {
               Center(
                 child: customButton(
                   name: 'Verify OTP',
-                  onCallBack: () {},
+                  onCallBack: () {
+                              Get.to(()=>ResetPasswordScreen());
+                  },
                   context: context,
                 ),
               ),

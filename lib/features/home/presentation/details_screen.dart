@@ -13,7 +13,8 @@ import '../data/history_chart_data.dart';
 import 'widgets/build_rooms_card.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  final Map<dynamic, dynamic>? data;
+  const DetailsScreen({super.key, this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class DetailsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "652",
+                    data?['ppm'] ?? '',
                     style: TextStyle(
                       fontSize: 42.sp,
                       fontWeight: FontWeight.w300,

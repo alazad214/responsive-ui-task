@@ -5,7 +5,7 @@ import '../core/constants/app_constants.dart';
 import '../features/authentication/presentation/signin_screen.dart';
 
 void checkUserLogin() async {
-  await Future.delayed(const Duration(seconds: 2), () {
+  await Future.delayed(const Duration(seconds: 3), () {
     if (appData.read(kKayAccessToken) != null) {
       Get.offAll(() => HomeScreen());
     } else {
